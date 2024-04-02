@@ -20,7 +20,7 @@ export default function Quotes() {
   const dispatch = useDispatch()
   return (
     <div id="quotes">
-      <div>{toggleError && toggleError.data.message}</div>
+      <div className='error'>{toggleError && toggleError.data.message}</div>
       <h3>Quotes {(quotesToggling || quotesRefreshing || quotesLoadingAfterDeletion ) && 'being updated...'}</h3>
       <div>
         {
@@ -40,7 +40,7 @@ export default function Quotes() {
                   <button onClick={() => dispatch(setHighlightedQuote(qt.id))}>HIGHLIGHT</button>
                   <button onClick={() => toggleFake({ id: qt.id, qt: { apocryphal: !qt.apocryphal }})}>FAKE</button>
                 </div>
-                <div>{deleteError && deleteError.data.message}</div>
+                <div className='error'>{deleteError && deleteError.data.message}</div>
               </div>
             ))
         }
