@@ -6,13 +6,13 @@ import {
 } from '../state/quotesSlice'
 import { 
   useGetQuotesQuery, 
-  useToggleFakeMutation, 
+  useToggleQuoteMutation, 
   useDeleteQuoteMutation 
 } from '../state/quotesApi'
 
 export default function Quotes() {
   const { data: quotes, isLoading: quotesLoading, isFetching: quotesRefreshing } = useGetQuotesQuery()
-  const [toggleFake, { error: toggleError, isLoading: quotesToggling }] = useToggleFakeMutation()
+  const [toggleQuote, { error: toggleError, isLoading: quotesToggling }] = useToggleQuoteMutation()
   const [deleteQuote, { error: deleteError, isLoading: quotesLoadingAfterDeletion }] = useDeleteQuoteMutation()
 
   const displayAllQuotes = useSelector(st => st.quotesState.displayAllQuotes)
@@ -38,7 +38,7 @@ export default function Quotes() {
                 <div className="quote-buttons">
                   <button onClick={() => deleteQuote(qt.id)}>DELETE</button>
                   <button onClick={() => dispatch(setHighlightedQuote(qt.id))}>HIGHLIGHT</button>
-                  <button onClick={() => toggleFake({ id: qt.id, qt: { apocryphal: !qt.apocryphal }})}>FAKE</button>
+                  <button onClick={() => toggleQuote({ id: qt.id, qt: { apocryphal: !qt.apocryphal }})}>FAKE</button>
                 </div>
                 <div className='error'>{deleteError && deleteError.data.message}</div>
               </div>
