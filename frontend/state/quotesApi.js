@@ -10,10 +10,10 @@ export const quotesApi = createApi({
             providesTags: ['Quotes'],
         }),
         createQuote: builder.mutation({
-            query: (quoteAuthor, quoteText) => ({
+            query: ({ authorName, quoteText }) => ({
                 url: 'quotes',
+                body: { authorName, quoteText },
                 method: 'POST',
-                body: { quoteAuthor, quoteText },
             }),
             invalidatesTags: ['Quotes'],
         }),
