@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const quotesApi = createApi({
     reducerPath: 'quotesApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:9009/api/quotes' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:9009/api/' }),
     tagTypes: ['Quotes'],
     endpoints: builder => ({
         getQuotes: builder.query({
@@ -17,10 +17,27 @@ export const quotesApi = createApi({
             }),
             invalidatesTags: ['Quotes'],
         }),
+        deleteQuote: builder.mutation({
+            query: id => ({
+                url: `quotes/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Quotes'],
+        }),
+        updateQuote: builder.mutation({
+            query: (id, apocryphal) => ({
+                url: `quotes/${id}`,
+                method: 'PUT',
+                body: { apocryphal },
+            }),
+            invalidatesTags: ['Quotes']
+        })
     }),
 })
 
 export const {
     useGetQuotesQuery,
     useCreateQuoteMutation,
+    useDeleteQuoteMutation,
+    useUpdateQuoteMutation,
 } = quotesApi
