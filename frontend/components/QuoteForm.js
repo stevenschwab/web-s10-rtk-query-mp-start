@@ -40,12 +40,12 @@ export default function TodoForm() {
       .then(() => {
         resetForm()
       })
-      .catch(err => {console.log(err)})
+      .catch(err => {})
   }
 
   return (
     <form id="quoteForm" onSubmit={onNewQuote}>
-      <div className='error'>{createQuoteError && createQuoteError.data.message}</div>
+      <div className='error'>{createQuoteError && <p>Error creating user: {createQuoteError.data.message}</p>}</div>
       <h3>New Quote {isLoading && 'being created...'}</h3>
       <label><span>Author:</span>
         <input
