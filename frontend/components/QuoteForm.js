@@ -34,8 +34,8 @@ export default function TodoForm() {
   }
   const onNewQuote = evt => {
     evt.preventDefault()
-    const { authorName: author, quoteText: quote } = state
-    createQuote({ author, quote })
+    const { authorName, quoteText } = state
+    createQuote({ authorName, quoteText })
       .unwrap()
       .then(() => {
         resetForm()
